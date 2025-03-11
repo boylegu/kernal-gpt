@@ -11,7 +11,6 @@ import (
 func getEmbedding(model string, connectionStr ...string) (llms.Model, *embeddings.EmbedderImpl) {
 	opts := []ollama.Option{ollama.WithModel(model)}
 	if len(connectionStr) > 0 {
-		fmt.Println(4211, connectionStr[0])
 		opts = append(opts, ollama.WithServerURL(connectionStr[0]))
 	}
 
