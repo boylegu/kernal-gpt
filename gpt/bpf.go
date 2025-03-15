@@ -5,18 +5,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/tmc/langchaingo/llms"
-	"github.com/tmc/langchaingo/llms/openai"
+	this "kernal-gpt/llms"
 	"log"
 	"os"
 )
 
 func RunBpftrace(prompt string) {
 
-	opts := []openai.Option{openai.WithModel("qwen2.5:1.5b")}
-	opts = append(opts, openai.WithBaseURL("http://10.55.1.57:11434/v1"))
-	opts = append(opts, openai.WithToken("ollama"))
-
-	llm, err := openai.New(opts...)
+	llm, err := this.CreateOpenAILLM()
 	if err != nil {
 		fmt.Println(1, err)
 	}
