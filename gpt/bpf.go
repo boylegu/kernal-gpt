@@ -3,18 +3,18 @@ package gpt
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/tmc/langchaingo/llms"
 	this "kernal-gpt/llms"
 	"log"
 	"os"
+	"strings"
 )
 
-func RunBpftrace(prompt string) {
+func RunBpftrace(prompt string) string {
 
 	llm, err := this.CreateOpenAILLM()
 	if err != nil {
-		fmt.Println(1, err)
+		log.Fatal(err)
 	}
 	ctx := context.Background()
 
@@ -25,10 +25,10 @@ func RunBpftrace(prompt string) {
 	resp, err := llm.GenerateContent(ctx, content, llms.WithTools(availableTools))
 
 	if err != nil {
-		fmt.Println(2, err)
+		log.Fatal(err)
 	}
 
-	executeToolCalls(ctx, llm, content, resp)
+	return executeToolCalls(resp)
 }
 
 func constructCommand(args string) []string {
@@ -97,15 +97,16 @@ func constructCommand(args string) []string {
 	return cmd
 }
 
-func executeToolCalls(ctx context.Context, llm llms.Model, messageHistory []llms.MessageContent, resp *llms.ContentResponse) []llms.MessageContent {
-	fmt.Println("Executing", len(resp.Choices[0].ToolCalls), "tool calls")
+func executeToolCalls(resp *llms.ContentResponse) string {
 	for _, toolCall := range resp.Choices[0].ToolCalls {
 		full_command := []string{"sudo"}
 		switch toolCall.FunctionCall.Name {
 		case "bpftrace":
 			full_command = append(full_command, "bpftrace")
 			args := toolCall.FunctionCall.Arguments
-			constructCommand(args)
+			command := constructCommand(args)
+			full_command = append(full_command, command...)
+			return strings.Join(full_command, " ")
 		case "SaveFile":
 			var data map[string]interface{}
 			args := toolCall.FunctionCall.Arguments
@@ -113,7 +114,7 @@ func executeToolCalls(ctx context.Context, llm llms.Model, messageHistory []llms
 				log.Fatal("Error parsing JSON:", err)
 			}
 			filename := data["filename"].(string)
-			fmt.Println("Save to file: " + filename)
+			log.Println("Save to file: " + filename)
 			err := os.WriteFile(filename, data["content"].([]byte), 0644)
 			if err != nil {
 				log.Fatal(err)
@@ -121,7 +122,7 @@ func executeToolCalls(ctx context.Context, llm llms.Model, messageHistory []llms
 		}
 	}
 
-	return messageHistory
+	return resp.Choices[0].Content
 }
 
 var availableTools = []llms.Tool{

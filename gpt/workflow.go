@@ -15,14 +15,13 @@ var shouldDecideInstruct = func(ctx context.Context, state []llms.MessageContent
 	lastMsg := state[len(state)-1]
 
 	for _, part := range lastMsg.Parts {
-		fmt.Println(part)
 		return part.(llms.TextContent).Text
 	}
 
 	return graph.END
 }
 
-func RunRagWorkflow(input string) {
+func RunRagWorkflow(input string) string {
 	llm, err := this.CreateOllamaLLM()
 	if err != nil {
 		log.Fatal(err)
@@ -35,9 +34,8 @@ func RunRagWorkflow(input string) {
 
 		out, err := chains.Run(ctx, llmChain, input)
 		if err != nil {
-			fmt.Println(err)
+			log.Fatal(err)
 		}
-		fmt.Println(23213, out)
 		return append(state,
 			llms.TextParts("rag_type", out+"_node"),
 		), nil
@@ -50,18 +48,21 @@ func RunRagWorkflow(input string) {
 
 		out, err := chains.Run(ctx, llmChain, input)
 		if err != nil {
-			fmt.Println(err)
+			log.Fatal(err)
 		}
 		fmt.Println(out)
-		return state, nil
+		return append(state,
+			llms.TextParts("stdout", out),
+		), nil
 
 	})
 
 	workflow.AddNode("ebpf_node", func(ctx context.Context, state []llms.MessageContent) ([]llms.MessageContent, error) {
 		prompt := ConstructRunningPrompt(input)
-		RunBpftrace(prompt)
-		return state, nil
-
+		out := RunBpftrace(prompt)
+		return append(state,
+			llms.TextParts("stdout", out),
+		), nil
 	})
 
 	workflow.SetEntryPoint("quert_instruct")
@@ -71,8 +72,7 @@ func RunRagWorkflow(input string) {
 
 	app, err := workflow.Compile()
 	if err != nil {
-		log.Printf("error: %v", err)
-		return
+		log.Fatal("error: %v", err)
 	}
 
 	intialState := []llms.MessageContent{
@@ -81,9 +81,10 @@ func RunRagWorkflow(input string) {
 
 	response, err := app.Invoke(context.Background(), intialState)
 	if err != nil {
-		log.Printf("error: %v", err)
-		return
+		log.Fatal("error: %v", err)
 	}
-	fmt.Println(response)
+
+	lastMsg := response[len(response)-1]
+	return lastMsg.Parts[0].(llms.TextContent).Text
 
 }
