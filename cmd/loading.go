@@ -5,28 +5,18 @@ import (
 	"time"
 )
 
-var isDone bool
-
 func spinner(delay time.Duration, done chan bool) {
-	fmt.Print("\033[?25l")
-	defer fmt.Print("\033[?25h")
-
-	frames := []string{"⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷"}
-	i := 0
+	frames := []string{"⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"}
 	for {
 		select {
 		case <-done:
-			fmt.Print("\r")
+			fmt.Print("\r") // 清除动画
 			return
 		default:
-			if isDone {
-				fmt.Print("\r")
-				done <- true
-				return
+			for _, frame := range frames {
+				fmt.Printf("\r%s Thinking...", frame)
+				time.Sleep(delay)
 			}
-			fmt.Printf("\r%s Thinking...", frames[i])
-			i = (i + 1) % len(frames)
-			time.Sleep(delay)
 		}
 	}
 }

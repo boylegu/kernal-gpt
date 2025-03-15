@@ -4,7 +4,6 @@ import (
 	"context"
 	_ "embed"
 	"encoding/json"
-	"fmt"
 	"github.com/tmc/langchaingo/schema"
 	"github.com/tmc/langchaingo/vectorstores"
 	"io"
@@ -44,7 +43,7 @@ func Retriever(input string) string {
 
 	store, err := this.GetVectorStore(e)
 	if err != nil {
-		fmt.Println(err)
+		log.Fatal(err)
 	}
 	documents := make([]schema.Document, 0, len(getExampleJson().Data))
 
@@ -66,14 +65,5 @@ func Retriever(input string) string {
 		output.WriteString(doc.PageContent)
 		output.WriteString("\n")
 	}
-
-	//result, err := chains.Run(
-	//	ctx,
-	//	chains.NewRetrievalQAFromLLM(
-	//		llm,
-	//		vectorstores.ToRetriever(store, 5, vectorstores.WithScoreThreshold(0.8)),
-	//	),
-	//	input,
-	//)
 	return output.String()
 }

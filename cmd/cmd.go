@@ -6,7 +6,9 @@ import (
 	"github.com/spf13/cobra"
 	"kernal-gpt/gpt"
 	"kernal-gpt/utils"
+	"log"
 	"os"
+	"time"
 )
 
 var (
@@ -44,26 +46,23 @@ func RunGPTCommand() *cobra.Command {
 
 			model, err = getParam(model, "KPT_MODEL", "Model")
 			if err != nil {
-				fmt.Println(err)
 				os.Exit(1)
 			}
 
 			ollamaURL, err = getParam(ollamaURL, "KPT_OLLAMA_URL", "Ollama URL")
 			if err != nil {
-				fmt.Println(err)
 				os.Exit(1)
 			}
 
 			ollamaURL, err = getParam(redisURL, "KPT_REDIS_URL", "Redis URL")
 			if err != nil {
-				fmt.Println(err)
 				os.Exit(1)
 			}
 		},
 
 		Run: func(cmd *cobra.Command, args []string) {
 			if inputFile == "" {
-				fmt.Println("Error: --input flag is required")
+				log.Println("Error: --input flag is required")
 				cmd.Help()
 				os.Exit(1)
 			}
@@ -72,7 +71,12 @@ func RunGPTCommand() *cobra.Command {
 			t := utils.TabbyNew()
 			t.AddLine("Version:", compilerVersion)
 			t.Print()
-			gpt.RunRagWorkflow(inputFile)
+
+			done := make(chan bool)
+			go spinner(100*time.Millisecond, done)
+			resp := gpt.RunRagWorkflow(inputFile)
+			done <- true
+			log.Println(resp)
 		},
 	}
 	runCmd.Flags().StringVarP(&inputFile, "input", "i", "", "input file (required)")
