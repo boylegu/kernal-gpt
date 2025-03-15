@@ -13,7 +13,7 @@ var (
 	ollamaURL       string
 	model           string
 	redisURL        string
-	compilerVersion string = "0.0.1"
+	compilerVersion = "0.0.1"
 )
 
 var RootCmd = &cobra.Command{
@@ -72,8 +72,7 @@ func RunGPTCommand() *cobra.Command {
 			t := utils.TabbyNew()
 			t.AddLine("Version:", compilerVersion)
 			t.Print()
-			prompt := gpt.ConstructRunningPrompt(inputFile)
-			gpt.RunBpftrace(prompt)
+			gpt.RunRagWorkflow(inputFile)
 		},
 	}
 	runCmd.Flags().StringVarP(&inputFile, "input", "i", "", "input file (required)")

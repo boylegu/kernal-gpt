@@ -7,15 +7,15 @@ import (
 	"fmt"
 	"github.com/tmc/langchaingo/schema"
 	"github.com/tmc/langchaingo/vectorstores"
-	"github.com/tmc/langchaingo/vectorstores/redisvector"
 	"io"
+	this "kernal-gpt/llms"
 	"log"
 	"os"
 	"strings"
 )
 
 func getExampleJson() *JSONData {
-	filePath := "/home/admin/kernal-gpt/gpt/examples.json"
+	filePath := "./gpt/examples.json"
 	file, err := os.Open(filePath)
 	defer file.Close()
 	bytes, err := io.ReadAll(file)
@@ -38,18 +38,11 @@ type JSONData struct {
 }
 
 func Retriever(input string) string {
-	redisURL := "redis://172.19.109.20:6379"
-	index := "kernal-vector"
 
-	_, e := getEmbedding("qwen2.5:1.5b", "http://10.55.1.57:11434")
-	fmt.Println(3, e)
+	_, e := getEmbedding()
 	ctx := context.Background()
 
-	store, err := redisvector.New(ctx,
-		redisvector.WithConnectionURL(redisURL),
-		redisvector.WithIndexName(index, true),
-		redisvector.WithEmbedder(e),
-	)
+	store, err := this.GetVectorStore(e)
 	if err != nil {
 		fmt.Println(err)
 	}
