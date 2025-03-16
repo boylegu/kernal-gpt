@@ -44,15 +44,11 @@ func constructCommand(args string) []string {
 		cmd = append(cmd, []string{"-B", operation["bufferingMode"].(string)}...)
 	}
 
-	if _, exists := operation["format"]; exists {
+	if _, exists := operation["format"]; exists && operation["format"] != nil {
 		cmd = append(cmd, []string{"-f", operation["format"].(string)}...)
 	}
 
-	if _, exists := operation["format"]; exists {
-		cmd = append(cmd, []string{"-f", operation["format"].(string)}...)
-	}
-
-	if _, exists := operation["outputFile"]; exists {
+	if _, exists := operation["outputFile"]; exists && operation["outputFile"] != nil {
 		cmd = append(cmd, []string{"-o", operation["outputFile"].(string)}...)
 	}
 
