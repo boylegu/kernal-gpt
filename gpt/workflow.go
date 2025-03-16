@@ -2,7 +2,6 @@ package gpt
 
 import (
 	"context"
-	"fmt"
 	"github.com/tmc/langchaingo/chains"
 	"github.com/tmc/langchaingo/llms"
 	"github.com/tmc/langchaingo/prompts"
@@ -50,7 +49,6 @@ func RunRagWorkflow(input string) string {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(out)
 		return append(state,
 			llms.TextParts("stdout", out),
 		), nil
