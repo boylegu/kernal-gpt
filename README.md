@@ -4,10 +4,17 @@
 <img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/kernal_gpt.png" width="360" height="300">
 </p>
 
+<h1 style="border-bottom: none">
+    <b>Kernal-GPT</b><br />
+</h1>
+
 <p>
 An AI agent based on the Ollama large model, capable of executing Linux commands through natural language and invoking kernel hooks to delve into the underlying system.
 </p>
 
+[![go](https://img.shields.io/badge/Go-1.24+-66C9D6)]()
+[![ver](https://img.shields.io/badge/version-0.3.0.dev-E940AF)]()
+[![go](https://img.shields.io/badge/license-MIT-E940AF)]()
 </div>
 
 ## Abilities & Possibilities

@@ -15,7 +15,7 @@ var (
 	ollamaURL       string
 	model           string
 	redisURL        string
-	compilerVersion = "0.0.1"
+	compilerVersion = "0.3.0.dev"
 )
 
 var RootCmd = &cobra.Command{
