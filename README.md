@@ -4,9 +4,7 @@
 <img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/kernal_gpt.png" width="360" height="300">
 </p>
 
-<h1 style="border-bottom: none">
-    <b>Kernal-GPT</b><br />
-</h1>
+<h1 style="border-bottom: none"><br /></h1>
 
 <p>
 An AI agent based on the Ollama large model, capable of executing Linux commands through natural language and invoking kernel hooks to delve into the underlying system.
@@ -128,3 +126,11 @@ We use examples from bpftrace tools to create vector store and search.
 ## the original intention of this project
 
 This project is mainly to validate the feasibility of AI combined with eBPF for impacting the underlying infrastructure and its future potential. You can also learn how to use Golang for AI Agent related development. The above examples run on qwen2.5:1.5b. I believe the actual results for you will be even better than mine. I also welcome discussions with you. If you're interested, feel free to submit a PR.
+
+## LICENCE
+MIT
+
+## Relevance
+
+- eBPF tutorial : https://ebpf.io/get-started/#books
+- bpftrace: https://github.com/iovisor/bpftrace
