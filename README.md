@@ -43,33 +43,6 @@ An AI agent based on the Ollama large model, capable of executing Linux commands
 <img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/black.png">
 </p>
 
-## Usage example
-
-- Operate Linux commands using natural language.
-
-<p align="center">
-<img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/oscmd_en_eg01.gif">
-</p>
-
-dangerous command detection
-
-<p align="center">
-<img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/oscmd_en_eg02.gif">
-</p>
-
-- Operate the Linux kernel using natural language, including automatically generating eBPF scripts.
-
-<p align="center">
-<img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/bpf_en_eg01.gif">
-</p>
-
-We use examples from bpftrace tools to create vector store and search.
-
-
-<p align="center">
-<img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/bpf_en_eg02.gif">
-</p>
-
 ## How to run
 
 1. This project uses Redis vector as the vector database, so Redis must be started first.
@@ -123,6 +96,34 @@ Use "kernal-gpt [command] --help" for more information about a command.
 ```
 
 >> The artifacts are in ./dist.
+
+## Usage example
+
+- Operate Linux commands using natural language.
+
+<p align="center">
+<img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/oscmd_en_eg01.gif">
+</p>
+
+dangerous command detection
+
+<p align="center">
+<img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/oscmd_en_eg02.gif">
+</p>
+
+- Operate the Linux kernel using natural language, including automatically generating eBPF scripts.
+
+<p align="center">
+<img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/bpf_en_eg01.gif">
+</p>
+
+We use examples from bpftrace tools to create vector store and search.
+
+
+<p align="center">
+<img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/bpf_en_eg02.gif">
+</p>
+
 
 ## the original intention of this project
 
