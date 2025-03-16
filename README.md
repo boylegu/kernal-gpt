@@ -29,6 +29,8 @@ An AI agent based on the Ollama large model, capable of executing Linux commands
 
 [×] support memory and context （Coming soon）
 
+[×] It will not run directly at the moment.（Currently, it is an experimental version and not suitable for direct execution.）
+
 ## Mechanism
 
 <p align="center">
@@ -38,6 +40,16 @@ An AI agent based on the Ollama large model, capable of executing Linux commands
 ## Usage example
 
 - Operate Linux commands using natural language.
+
+<p align="center">
+<img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/oscmd_en_eg01.gif">
+</p>
+
+dangerous command detection
+
+<p align="center">
+<img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/oscmd_en_eg02.gif">
+</p>
 
 - Operate the Linux kernel using natural language, including automatically generating eBPF scripts.
 
