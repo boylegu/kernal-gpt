@@ -46,7 +46,7 @@ For example, you can input: "List all files in the current directory" or "Create
 If there are subdirectories, please consider them as well.
 Please note that I can only help you execute commands related to the operating system, such as file operations or system information queries.
 Do not input commands that may harm the system or change data, such as deleting, moving, copying, or killing processes.
-Please generate executable commands directly, without any Markdown code blocks (e.g., '''bash '''').
+"Please return the raw operating system command that performs the following task, without any code block formatting or extra characters. For example, if I ask to list files in a directory, return only the command itself like ls /tmp/*."
 
 Please determine whether the following user input is a valid operating system command. If it is, return the command; if it could potentially harm the system or change data, return "danger-command"; if it cannot be converted into an operating system command, return "non-command."
 

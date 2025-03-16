@@ -25,8 +25,29 @@ An AI agent based on the Ollama large model, capable of executing Linux commands
 
 [✔] eBPF integration (Only supports Linux kernel 5.10 and above.)
 
+[✔] dangerous command detection
+
+[×] support memory and context （Coming soon）
+
 ## Mechanism
 
 <p align="center">
 <img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/black.png">
+</p>
+
+## Usage example
+
+- Operate Linux commands using natural language.
+
+- Operate the Linux kernel using natural language, including automatically generating eBPF scripts.
+
+<p align="center">
+<img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/bpf_en_eg01.gif">
+</p>
+
+We use examples from bpftrace tools to create vector store and search.
+
+
+<p align="center">
+<img src="https://cdn.jsdelivr.net/gh/boylegu/kernal-gpt/assets/bpf_en_eg02.gif">
 </p>
