@@ -80,7 +80,7 @@ docker run -p 6379:6379 docker.io/redislabs/redisearch:latest
 
 2. Set environment variables
 
-```bash
+```shell
 
 export KPT_MODEL="" # "please select the llm
 export KPT_OLLAMA_URL="http://127.0.0.1:11434"
@@ -92,6 +92,34 @@ export KPT_REDIS_URL="redis://127.0.0.1:6379"
 
 ```
 make
+```
+
+4.
+
+```shell
+
+# ./kernal_gpt
+  _                                    _                           _
+ | | __   ___   _ __   _ __     __ _  | |           __ _   _ __   | |_
+ | |/ /  / _ \ | '__| | '_ \   / _` | | |  _____   / _` | | '_ \  | __|
+ |   <  |  __/ | |    | | | | | (_| | | | |_____| | (_| | | |_) | | |_
+ |_|\_\  \___| |_|    |_| |_|  \__,_| |_|          \__, | | .__/   \__|
+                                                   |___/  |_|
+
+A tool that converts natural language commands into OS command-line utilities and kernel hooks for automated system operations.
+Usage:
+  kernal-gpt [command]
+
+Available Commands:
+  completion  Generate the autocompletion script for the specified shell
+  help        Help about any command
+  run         Run the kernal-gpt tool
+
+Flags:
+  -h, --help   help for kernal-gpt
+
+Use "kernal-gpt [command] --help" for more information about a command.
+
 ```
 
 >> The artifacts are in ./dist.
